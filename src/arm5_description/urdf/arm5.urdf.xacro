@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="arm5">
+
+  <!-- ====== PARÁMETROS (AQUÍ CAMBIAS DISTANCIAS) ====== -->
+  <xacro:property name="L1" value="0.10"/> <!-- base -> joint1 -->
+  <xacro:property name="L2" value="0.24"/> <!-- joint1 -> joint2 -->
+  <xacro:property name="L3" value="0.23"/> <!-- joint2 -> joint3 -->
+  <xacro:property name="L4" value="0.06"/> <!-- joint3 -> joint4 -->
+  <xacro:property name="L5" value="0.05"/> <!-- joint4 -> tool -->
+
+  <xacro:property name="radius" value="0.025"/>
+
+  <material name="gray"><color rgba="0.6 0.6 0.6 1.0"/></material>
+  <material name="blue"><color rgba="0.2 0.4 0.8 1.0"/></material>
+  <material name="orange"><color rgba="0.9 0.5 0.1 1.0"/></material>
+
+  <link name="base_link">
+    <visual>
+      <geometry><cylinder radius="0.05" length="0.04"/></geometry>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+  <link name="link1">
+    <visual>
+      <geometry><cylinder radius="${radius}" length="${L1}"/></geometry>
+      <origin xyz="0 0 ${L1/2}" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="link2">
+    <visual>
+      <geometry><cylinder radius="${radius}" length="${L2}"/></geometry>
+      <origin xyz="${L2/2} 0 0" rpy="0 1.5708 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <link name="link3">
+    <visual>
+      <geometry><cylinder radius="${radius}" length="${L3}"/></geometry>
+      <origin xyz="${L3/2} 0 0" rpy="0 1.5708 0"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="link4">
+    <visual>
+      <geometry><cylinder radius="${radius}" length="${L4}"/></geometry>
+      <origin xyz="${L4/2} 0 0" rpy="0 1.5708 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <link name="link5">
+    <visual>
+      <geometry><cylinder radius="${radius}" length="${L5}"/></geometry>
+      <origin xyz="${L5/2} 0 0" rpy="0 1.5708 0"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="tool0">
+    <visual>
+      <geometry><sphere radius="0.02"/></geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+  <!-- Joints (5 DOF) -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.6652" upper="6.2832" effort="20" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 ${L1}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.5779" upper="0.4636" effort="20" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="${L2} 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.0944" upper="2.0071" effort="20" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint4" type="revolute">
+    <parent link="link3"/>
+    <child link="link4"/>
+    <origin xyz="${L3} 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.0944" upper="2.0071" effort="20" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint5" type="revolute">
+    <parent link="link4"/>
+    <child link="link5"/>
+    <origin xyz="${L4} 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="1.5708" effort="20" velocity="2.0"/>
+  </joint>
+
+  <joint name="tool0_fixed" type="fixed">
+    <parent link="link5"/>
+    <child link="tool0"/>
+    <origin xyz="${L5} 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
