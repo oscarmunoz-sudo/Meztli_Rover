@@ -31,10 +31,10 @@ Las imágenes del rover y prototipos se encuentran en:
 
 ### Galería inicial
 
-![Prototipo Rover 1](docs/Images/1.jpg)
-![Prototipo Rover 2](docs/Images/2.jpg)
-![Prototipo Rover 3](docs/Images/3.jpg)
-![Prototipo Rover 4](docs/Images/4.jpg)
+![Prototipo Rover 1](docs/Images/Cozobi_prototipe.jpg)
+![Prototipo Rover 2](docs/Images/Cozobi_Rover.jpg)
+![Prototipo Rover 3](docs/Images/Meztli_Rover.jpg)
+![Prototipo Rover 4](docs/Images/Meztli_Rover_2.jpg)
 
 ## 🚀 Objetivos del repositorio
 
